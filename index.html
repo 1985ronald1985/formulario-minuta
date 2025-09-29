@@ -58,51 +58,6 @@
             font-weight: 600;
             color: #212529;
         }
-
-        @media print {
-            @page {
-                size: letter;
-                margin: 1cm;
-            }
-            body {
-                background-color: #fff !important;
-                font-size: 8.5pt;
-                line-height: 1.2;
-            }
-            .no-print { display: none; }
-            .container-wrapper { padding: 0; }
-            .invoice-card {
-                box-shadow: none !important;
-                border: none !important;
-                padding: 0 !important;
-            }
-            .text-center.mb-5 { margin-bottom: 1.5rem !important; }
-            .row.g-4.mb-4 { margin-bottom: 1rem !important; }
-            .form-control, .form-select {
-                font-size: 8.5pt;
-                padding: 1px 2px;
-                height: auto;
-            }
-            h1.display-6 { font-size: 16pt !important; }
-            .lead { font-size: 9pt !important; }
-            h4 {
-                font-size: 11pt !important;
-                margin-top: 1rem !important;
-                margin-bottom: 0.5rem !important;
-                padding-bottom: 0.25rem !important;
-            }
-            .table { margin-bottom: 0.5rem !important; }
-            .table td, .table th {
-                padding: 2px !important;
-            }
-            .row.justify-content-end.mt-4 { margin-top: 1rem !important; }
-            .grand-total-box {
-                padding: 0.25rem !important;
-                border: 1px solid #ccc;
-            }
-            .grand-total-box .grand-total-label { font-size: 9pt !important; }
-            .grand-total-box .grand-total-amount { font-size: 14pt !important; }
-        }
     </style>
 </head>
 <body>
@@ -124,7 +79,7 @@
             </div>
 
             <h4>Costo por trámite de transferencia</h4>
-            <table class="table table-hover align-middle">
+            <table class="table table-hover align-middle" id="tabla-transferencia">
                 <thead class="table-light"><tr><th>CONCEPTO</th><th style="width: 200px;">IMPORTE (BS)</th><th>OBSERVACIONES</th></tr></thead>
                 <tbody>
                     <tr><td>FOTOCOPIAS LEGALIZADAS</td><td><input type="number" class="form-control text-end costo-transferencia" value="50" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
@@ -137,7 +92,7 @@
             </table>
 
             <h4>Costo por regularización de trámite</h4>
-            <table class="table table-hover align-middle">
+            <table class="table table-hover align-middle" id="tabla-regularizacion">
                 <thead class="table-light"><tr><th>CONCEPTO</th><th style="width: 200px;">IMPORTE (BS)</th><th>OBSERVACIONES</th></tr></thead>
                 <tbody>
                     <tr><td>DD.RR. INSCRIPCIÓN DE SUBINSCRIPCIÓN</td><td><input type="number" class="form-control text-end costo-general" value="30" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
@@ -159,12 +114,15 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary btn-lg w-100 mt-5 no-print" onclick="window.print()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill me-2" viewBox="0 0 16 16"><path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm5 8H6a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/><path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/></svg>
-                Imprimir o Guardar PDF
+            <button class="btn btn-primary btn-lg w-100 mt-5" onclick="generatePDF()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-pdf-fill me-2" viewBox="0 0 16 16"><path d="M5.523 12.424q.21-.124.459-.238a8 8 0 0 1-.45.606c-.28.337-.498.516-.635.572a.27.27 0 0 1-.035.012.28.28 0 0 1-.026-.044c-.056-.11-.054-.216.04-.36.106-.165.319-.354.647-.548m2.455-1.647q-.178.037-.356.078a21 21 0 0 0 .5-1.05 12 12 0 0 0 .51.858q-.326.048-.654.114m2.525.939a4 4 0 0 1-.435-.41q.344.007.612.054c.317.057.466.147.518.209a.1.1 0 0 1 .026.064.44.44 0 0 1-.06.2.3.3 0 0 1-.094.124.1.1 0 0 1-.069.015c-.09-.003-.252-.095-.462-.255ZM8.25 8.433c.28.326.438.44.522.5.127.093.151.11.151.11l.034.019a.6.6 0 0 1 .016.016.6.6 0 0 1 .016.016c.006.007.01.01.01.01H8.84a.5.5 0 0 1-.439.25c-.166 0-.234-.05-.234-.05s-.08-.04-.22-.16c-.173-.15-.247-.235-.247-.235a.27.27 0 0 1 0-.012c.002-.002.007-.007.016-.016.01-.01.028-.027.05-.053.07-.077.16-.17.275-.29.139-.144.29-.3.455-.468a.9.9 0 0 1 .129-.103.2.2 0 0 1 .016-.012.2.2 0 0 1 .016-.012l.007-.004a.05.05 0 0 1 .003-.001c.003-.002.007-.004.011-.006l.01-.004c.003-.002.005-.003.005-.003l.002-.001h.002Z"/><path d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4A1 1 0 0 1 14 4.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2m5.5 1.5v2a1 1 0 0 0 1 1h2zM4.165 13.668c.09.18.23.343.438.419.207.075.412.04.58-.092.17-.132.28-.396.28-.646 0-.21-.058-.4-.172-.518-.114-.117-.27-.164-.46-.164-.193 0-.358.061-.474.184-.118.123-.175.29-.175.477 0 .15.046.282.12.39zm1.955-1.583c.096.148.223.263.374.339.15.077.309.115.477.115.19 0 .352-.057.488-.172.135-.115.203-.28.203-.494 0-.19-.06-.347-.18-.462-.12-.115-.283-.172-.488-.172-.16 0-.304.04-.434.123a1 1 0 0 0-.351.367zm1.965 1.583c.096.148.223.263.374.339.15.077.309.115.477.115.19 0 .352-.057.488-.172.135-.115.203-.28.203-.494 0-.19-.06-.347-.18-.462-.12-.115-.283-.172-.488-.172-.16 0-.304.04-.434.123a1 1 0 0 0-.351.367zm.642-2.954c.025.025.05.05.074.074l.02.018a.15.15 0 0 1 .01.016c.003.003.003.003.003.003a.1.1 0 0 1 0 .01.1.1 0 0 1-.004.004.1.1 0 0 1-.003.003.1.1 0 0 1-.016.01c-.003.002-.003.002-.003.002l-.018.02a.7.7 0 0 1-.074.074.5.5 0 0 1-.077.053.5.5 0 0 1-.09.042.5.5 0 0 1-.09.03.5.5 0 0 1-.09.017.5.5 0 0 1-.09-.017.5.5 0 0 1-.09-.03.5.5 0 0 1-.09-.042.5.5 0 0 1-.077-.053.7.7 0 0 1-.074-.074l-.018-.02a.15.15 0 0 1-.003-.002c-.002-.003-.002-.003-.002-.003a.1.1 0 0 1-.01-.016.1.1 0 0 1-.004-.004.1.1 0 0 1 0-.01c.002-.002.002-.002.002-.003a.15.15 0 0 1 .018-.02.7.7 0 0 1 .074-.074.5.5 0 0 1 .077-.053.5.5 0 0 1 .09-.042.5.5 0 0 1 .09-.03c.03-.01.06-.017.09-.017s.06.007.09.017c.03.01.06.022.09.042.03.018.058.035.077.053z"/></svg>
+                Generar PDF Profesional
             </button>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 
     <script>
         function updateTotals() {
@@ -201,6 +159,147 @@
         }
 
         window.onload = calculateAndApply;
+
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // --- HEADER ---
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(16);
+            doc.text('TRÁMITE DE TITULARIZACIÓN', 105, 20, { align: 'center' });
+            
+            doc.setFillColor(7, 89, 133); // Darker blue from image
+            doc.rect(65, 25, 80, 8, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(255, 255, 255);
+            doc.setFont('helvetica', 'bold');
+            doc.text('INMOBILIARIA KANTUTANI S.A.', 105, 30.5, { align: 'center' });
+
+            // --- CLIENT DATA ---
+            let startY = 45;
+            const leftMargin = 14;
+            const rightMargin = 110;
+            doc.setFontSize(7);
+            doc.setTextColor(100);
+            doc.setFont('helvetica', 'normal');
+
+            const clientData = [
+                { label: 'Nombre Cliente', value: document.getElementById('nombreCliente').value },
+                { label: 'Contrato', value: document.getElementById('contrato').value },
+                { label: 'Valor Lote (Bs)', value: document.getElementById('valorLote').value },
+                { label: 'Base imponible actualizado (Bs)', value: document.getElementById('baseImponible').value },
+                { label: 'Tipo de cambio', value: document.getElementById('tipoCambio').value },
+                { label: 'Lote', value: document.getElementById('lote').value },
+                { label: 'Proyecto / Sector', value: document.getElementById('proyecto').value, fullWidth: true },
+            ];
+
+            let currentY = startY;
+            for (let i = 0; i < clientData.length; i += 2) {
+                const item1 = clientData[i];
+                const item2 = (i + 1 < clientAta.length && !item1.fullWidth) ? clientData[i+1] : null;
+
+                doc.setFontSize(7);
+                doc.setTextColor(100);
+                doc.text(item1.label, leftMargin, currentY);
+                if (item2) doc.text(item2.label, rightMargin, currentY);
+
+                currentY += 4;
+                doc.setFontSize(9);
+                doc.setTextColor(0);
+                doc.setFont('helvetica', 'bold');
+                doc.text(item1.value, leftMargin, currentY);
+                if (item2) doc.text(item2.value, rightMargin, currentY);
+                
+                currentY += 7;
+                if(item1.fullWidth) i--;
+            }
+            startY = currentY - 4;
+            doc.setDrawColor(222, 226, 230);
+            doc.line(leftMargin, startY, 196, startY);
+
+            // --- TABLES ---
+            const headStyles = { fillColor: [248, 249, 250], textColor: 30, fontStyle: 'bold' };
+            const footStyles = { fillColor: [248, 249, 250], textColor: 30, fontStyle: 'bold', halign: 'right' };
+            const columnStyles = { 1: { halign: 'right' } };
+
+            // Table 1
+            const table1Body = [];
+            const table1Rows = document.querySelectorAll('#tabla-transferencia tbody tr');
+            table1Rows.forEach((row, index) => {
+                if (index < table1Rows.length - 1) {
+                    table1Body.push([
+                        row.cells[0].innerText,
+                        parseFloat(row.querySelector('input[type="number"]').value).toFixed(2),
+                        row.querySelector('input[type="text"]').value
+                    ]);
+                }
+            });
+            const total1 = document.getElementById('totalTransferencia').textContent;
+
+            doc.setFontSize(9);
+            doc.setTextColor(0);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Costo por trámite de transferencia', leftMargin, startY + 8);
+            doc.autoTable({
+                startY: startY + 10,
+                head: [['CONCEPTO', 'IMPORTE (BS)', 'OBSERVACIONES']],
+                body: table1Body,
+                foot: [[{ content: 'Total', colSpan: 1, styles: { halign: 'right' } }, total1, '']],
+                theme: 'grid',
+                headStyles: headStyles,
+                footStyles: footStyles,
+                columnStyles: columnStyles,
+            });
+
+            // Table 2
+            let finalY = doc.lastAutoTable.finalY;
+            const table2Body = [];
+            const table2Rows = document.querySelectorAll('#tabla-regularizacion tbody tr');
+            table2Rows.forEach((row, index) => {
+                if (index < table2Rows.length - 1) {
+                    const amountInput = row.querySelector('input[type="number"]');
+                    table2Body.push([
+                        row.cells[0].innerText,
+                        parseFloat(amountInput ? amountInput.value : row.cells[1].textContent).toFixed(2),
+                        row.cells[2].textContent
+                    ]);
+                }
+            });
+            const total2 = document.getElementById('totalGeneralConceptos').textContent;
+
+            doc.setFontSize(9);
+            doc.setTextColor(0);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Costo por regularización de trámite', leftMargin, finalY + 8);
+            doc.autoTable({
+                startY: finalY + 10,
+                head: [['CONCEPTO', 'IMPORTE (BS)', 'OBSERVACIONES']],
+                body: table2Body,
+                foot: [[{ content: 'Total', colSpan: 1, styles: { halign: 'right' } }, total2, '']],
+                theme: 'grid',
+                headStyles: headStyles,
+                footStyles: footStyles,
+                columnStyles: columnStyles,
+            });
+
+            // --- GRAND TOTAL ---
+            finalY = doc.lastAutoTable.finalY;
+            const grandTotal = document.getElementById('totalGeneral').textContent;
+            doc.setFillColor(241, 243, 245);
+            doc.roundedRect(120, finalY + 10, 76, 15, 3, 3, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(50);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Total General (Bs)', 125, finalY + 16);
+            doc.setFontSize(16);
+            doc.setTextColor(0);
+            doc.text(grandTotal, 194, finalY + 22, { align: 'right' });
+
+            // --- SAVE ---
+            doc.save('Minuta_Titularizacion.pdf');
+        }
+
     </script>
 </body>
 </html>
