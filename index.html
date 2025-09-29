@@ -197,7 +197,7 @@
             let currentY = startY;
             for (let i = 0; i < clientData.length; i += 2) {
                 const item1 = clientData[i];
-                const item2 = (i + 1 < clientAta.length && !item1.fullWidth) ? clientData[i+1] : null;
+                const item2 = (i + 1 < clientData.length && !item1.fullWidth) ? clientData[i+1] : null;
 
                 doc.setFontSize(7);
                 doc.setTextColor(100);
