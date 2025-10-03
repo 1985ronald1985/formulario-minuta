@@ -79,7 +79,8 @@
             </div>
 
             <h4>Costo por trámite de transferencia</h4>
-<thead class="table-light"><tr><th>CONCEPTO</th><th style="width: 200px;" class="text-end">IMPORTE (BS)</th><th>OBSERVACIONES</th></tr></thead>
+            <table class="table table-hover align-middle" id="tabla-transferencia">
+                <thead class="table-light"><tr><th>CONCEPTO</th><th style="width: 200px;">IMPORTE (BS)</th><th>OBSERVACIONES</th></tr></thead>
                 <tbody>
                     <tr><td>FOTOCOPIAS LEGALIZADAS</td><td><input type="number" class="form-control text-end costo-transferencia" value="50" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
                     <tr><td>FOTOCOPIAS SIMPLES</td><td><input type="number" class="form-control text-end costo-transferencia" value="50" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
@@ -91,7 +92,7 @@
             </table>
 
             <table class="table table-hover align-middle" id="tabla-regularizacion">
-                <thead class="table-light"><tr><th>CONCEPTO</th><th style="width: 200px;" class="text-end">IMPORTE (BS)</th><th>OBSERVACIONES</th></tr></thead>
+                <thead class="table-light"><tr><th>CONCEPTO</th><th style="width: 200px;">IMPORTE (BS)</th><th>OBSERVACIONES</th></tr></thead>
                 <tbody>
                     <tr><td>DD.RR. INSCRIPCIÓN DE SUBINSCRIPCIÓN</td><td><input type="number" class="form-control text-end costo-general" value="30" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
                     <tr><td>DD.RR. ARANCEL (5x1000)</td><td><input type="number" step="0.01" class="form-control text-end" id="arancel" oninput="updateTotals()"></td><td><input type="text" class="form-control" value="Sujeto a base de calculo (Valor lote/Base)"></td></tr>
