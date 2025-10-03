@@ -96,10 +96,10 @@
                 <thead class="table-light"><tr><th>CONCEPTO</th><th style="width: 200px;">IMPORTE (BS)</th><th>OBSERVACIONES</th></tr></thead>
                 <tbody>
                     <tr><td>DD.RR. INSCRIPCIÓN DE SUBINSCRIPCIÓN</td><td><input type="number" class="form-control text-end costo-general" value="30" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
-                    <tr><td>DD.RR. ARANCEL (5x1000)</td><td><input type="number" step="0.01" class="form-control text-end" id="arancel" oninput="updateTotals()"></td><td>Sujeto a base de calculo (Valor lote/Base)</td></tr>
+                    <tr><td>DD.RR. ARANCEL (5x1000)</td><td><input type="number" step="0.01" class="form-control text-end" id="arancel" oninput="updateTotals()"></td><td><input type="text" class="form-control" value="Sujeto a base de calculo (Valor lote/Base)"></td></tr>
                     <tr><td>DD.RR. DERECHO DE COMPUTO Y FOLIO REAL</td><td><input type="number" class="form-control text-end costo-general" value="60" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
                     <tr><td>DD.RR. SERVICIO DE REGISTRO Y FORMULARIOS</td><td><input type="number" class="form-control text-end costo-general" value="72" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
-                    <tr><td>S.I.N. IMPUESTO A LA TRANSACCIÓN (IT 3%)</td><td><input type="number" step="0.01" class="form-control text-end" id="impuesto" oninput="updateTotals()"></td><td>Sujeto a base de calculo (Valor lote/Base)</td></tr>
+                    <tr><td>S.I.N. IMPUESTO A LA TRANSACCIÓN (IT 3%)</td><td><input type="number" step="0.01" class="form-control text-end" id="impuesto" oninput="updateTotals()"></td><td><input type="text" class="form-control" value="Sujeto a base de calculo (Valor lote/Base)"></td></tr>
                     <tr><td>ANTECEDENTE CATASTRAL</td><td><input type="number" class="form-control text-end costo-general" value="55" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
                     <tr class="table-light"><td class="text-end fw-bold">Total</td><td id="totalGeneralConceptos" class="text-end fw-bold fs-5">757.01</td><td></td></tr>
                 </tbody>
@@ -297,7 +297,10 @@
             doc.text(grandTotal, 194, finalY + 22, { align: 'right' });
 
             // --- SAVE ---
-            doc.save('Minuta_Titularizacion.pdf');
+            const nombreCliente = document.getElementById('nombreCliente').value.trim();
+            const contrato = document.getElementById('contrato').value.trim();
+            const fileName = `Minuta_${nombreCliente.replace(/ /g, '_')}_${contrato}.pdf`;
+            doc.save(fileName);
         }
 
     </script>
