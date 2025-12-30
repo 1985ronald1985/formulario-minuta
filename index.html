@@ -1,106 +1,132 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trámite de Titularización</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #e9ecef;
-        }
-        .container-wrapper {
-            padding-top: 3rem;
-            padding-bottom: 3rem;
-        }
-        .invoice-card {
-            background-color: #fff;
-            border-top: 5px solid #0d6efd;
-            border-radius: 0.5rem;
-            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
-            padding: 3rem;
-        }
-        .form-label {
-            font-weight: 600;
-        }
-        .table th {
-            font-weight: 600;
-        }
-        .form-control:focus, .form-select:focus {
-            border-color: #0d6efd;
-            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-        }
-        h4 {
-            color: #0d6efd;
-            font-weight: 600;
-            border-bottom: 1px solid #dee2e6;
-            padding-bottom: 0.75rem;
-            margin-top: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .grand-total-box {
-            background-color: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            text-align: right;
-        }
-        .grand-total-box .grand-total-label {
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: #6c757d;
-        }
-        .grand-total-box .grand-total-amount {
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: #212529;
-        }
-    </style>
 </head>
+
 <body>
     <div class="container-wrapper">
         <div class="container invoice-card">
             <div class="text-center mb-5">
                 <h1 class="display-6" style="font-weight: 400;">TRÁMITE DE TITULARIZACIÓN</h1>
-                <p class="lead text-secondary">INMOBILIARIA KANTUTANI S.A.</p>
+                <select
+                    class="form-select form-select-lg mb-3 text-center border-0 bg-transparent text-secondary fw-bold"
+                    id="empresa" style="font-size: 1.25rem;">
+                    <option value="INMOBILIARIA KANTUTANI S.A.">INMOBILIARIA KANTUTANI S.A.</option>
+                    <option value="INMOBILIARIA LAS MISIONES S.A.">INMOBILIARIA LAS MISIONES S.A.</option>
+                </select>
             </div>
 
             <div class="row g-4 mb-4">
-                <div class="col-6"><label class="form-label">Nombre Cliente</label><input type="text" class="form-control" id="nombreCliente" value="MICHELE BLACUTT DE SILES"></div>
-                <div class="col-6"><label class="form-label">Contrato</label><input type="text" class="form-control" id="contrato" value="980785"></div>
-                <div class="col-6"><label class="form-label">Valor Lote (Bs)</label><input type="number" class="form-control" id="valorLote" value="15428.93" oninput="calculateAndApply()"></div>
-                <div class="col-6"><label class="form-label">Base imponible actualizado (Bs)</label><input type="number" class="form-control" id="baseImponible" value="10977.01"></div>
-                <div class="col-6"><label class="form-label">Tipo de cambio</label><input type="number" class="form-control" id="tipoCambio" value="6.96"></div>
-                <div class="col-6"><label class="form-label">Lote</label><input type="text" class="form-control" id="lote" value="1-13-J-33"></div>
-                <div class="col-12"><label class="form-label">Proyecto / Sector</label><input type="text" class="form-control" id="proyecto" value="KANTUTANI CEMENTERIO JARDIN / MIRADOR"></div>
+                <div class="col-6"><label class="form-label">Nombre Cliente</label><input type="text"
+                        class="form-control" id="nombreCliente" value="MICHELE BLACUTT DE SILES"></div>
+                <div class="col-6"><label class="form-label">Contrato</label><input type="text" class="form-control"
+                        id="contrato" value="980785"></div>
+                <div class="col-6"><label class="form-label">Valor Lote (Bs)</label><input type="number"
+                        class="form-control" id="valorLote" value="15428.93"></div>
+                <div class="col-6"><label class="form-label">Base imponible actualizado (Bs)</label><input type="number"
+                        class="form-control" id="baseImponible" value="10977.01"></div>
+                <div class="col-6"><label class="form-label">Tipo de cambio</label><input type="number"
+                        class="form-control" id="tipoCambio" value="6.96"></div>
+                <div class="col-6"><label class="form-label">Lote</label><input type="text" class="form-control"
+                        id="lote" value="1-13-J-33"></div>
+                <div class="col-12"><label class="form-label">Proyecto / Sector</label><input type="text"
+                        class="form-control" id="proyecto" value="KANTUTANI CEMENTERIO JARDIN / MIRADOR"></div>
             </div>
 
             <h4>Costo por trámite de transferencia</h4>
             <table class="table table-hover align-middle" id="tabla-transferencia">
-                <thead class="table-light"><tr><th>CONCEPTO</th><th style="width: 200px;">IMPORTE (BS)</th><th>OBSERVACIONES</th></tr></thead>
+                <thead class="table-light">
+                    <tr>
+                        <th>CONCEPTO</th>
+                        <th style="width: 200px;">IMPORTE (BS)</th>
+                        <th>OBSERVACIONES</th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <tr><td>FOTOCOPIAS LEGALIZADAS</td><td><input type="number" class="form-control text-end costo-transferencia" value="50" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
-                    <tr><td>FOTOCOPIAS SIMPLES</td><td><input type="number" class="form-control text-end costo-transferencia" value="50" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
-                    <tr><td>NOTARIA (PROTOCOLO Y TESTIMONIO)</td><td><input type="number" class="form-control text-end costo-transferencia" value="200" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
-                    <tr><td>GASTOS ADMINISTRATIVOS</td><td><input type="number" class="form-control text-end costo-transferencia" value="200" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
-                    <tr><td>GESTIÓN LEGAL</td><td><input type="number" class="form-control text-end costo-transferencia" value="400" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
-                    <tr class="table-light"><td class="fw-bold">Total</td><td id="totalTransferencia" class="text-end fw-bold fs-5">900.00</td><td></td></tr>
+                    <tr>
+                        <td>FOTOCOPIAS LEGALIZADAS</td>
+                        <td><input type="number" class="form-control text-end costo-transferencia" value="50"></td>
+                        <td><input type="text" class="form-control observacion-input"></td>
+                    </tr>
+                    <tr>
+                        <td>FOTOCOPIAS SIMPLES</td>
+                        <td><input type="number" class="form-control text-end costo-transferencia" value="50"></td>
+                        <td><input type="text" class="form-control observacion-input"></td>
+                    </tr>
+                    <tr>
+                        <td>NOTARIA (PROTOCOLO Y TESTIMONIO)</td>
+                        <td><input type="number" class="form-control text-end costo-transferencia" value="200"></td>
+                        <td><input type="text" class="form-control observacion-input"></td>
+                    </tr>
+                    <tr>
+                        <td>GASTOS ADMINISTRATIVOS</td>
+                        <td><input type="number" class="form-control text-end costo-transferencia" value="200"></td>
+                        <td><input type="text" class="form-control observacion-input"></td>
+                    </tr>
+                    <tr>
+                        <td>GESTIÓN LEGAL</td>
+                        <td><input type="number" class="form-control text-end costo-transferencia" value="400"></td>
+                        <td><input type="text" class="form-control observacion-input"></td>
+                    </tr>
+                    <tr class="table-light">
+                        <td class="fw-bold">Total</td>
+                        <td id="totalTransferencia" class="text-end fw-bold fs-5">900.00</td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
 
             <table class="table table-hover align-middle" id="tabla-regularizacion">
-                <thead class="table-light"><tr><th>CONCEPTO</th><th style="width: 200px;">IMPORTE (BS)</th><th>OBSERVACIONES</th></tr></thead>
+                <thead class="table-light">
+                    <tr>
+                        <th>CONCEPTO</th>
+                        <th style="width: 200px;">IMPORTE (BS)</th>
+                        <th>OBSERVACIONES</th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <tr><td>DD.RR. INSCRIPCIÓN DE SUBINSCRIPCIÓN</td><td><input type="number" class="form-control text-end costo-general" value="30" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
-                    <tr><td>DD.RR. ARANCEL (5x1000)</td><td><input type="number" step="0.01" class="form-control text-end" id="arancel" oninput="updateTotals()"></td><td><input type="text" class="form-control" value="Sujeto a base de calculo (Valor lote/Base)"></td></tr>
-                    <tr><td>DD.RR. DERECHO DE COMPUTO Y FOLIO REAL</td><td><input type="number" class="form-control text-end costo-general" value="60" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
-                    <tr><td>DD.RR. SERVICIO DE REGISTRO Y FORMULARIOS</td><td><input type="number" class="form-control text-end costo-general" value="72" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
-                    <tr><td>S.I.N. IMPUESTO A LA TRANSACCIÓN (IT 3%)</td><td><input type="number" step="0.01" class="form-control text-end" id="impuesto" oninput="updateTotals()"></td><td><input type="text" class="form-control" value="Sujeto a base de calculo (Valor lote/Base)"></td></tr>
-                    <tr><td>ANTECEDENTE CATASTRAL</td><td><input type="number" class="form-control text-end costo-general" value="55" oninput="updateTotals()"></td><td><input type="text" class="form-control"></td></tr>
-                    <tr class="table-light"><td class="fw-bold">Total</td><td id="totalGeneralConceptos" class="text-end fw-bold fs-5">757.01</td><td></td></tr>
+                    <tr>
+                        <td>DD.RR. INSCRIPCIÓN DE SUBINSCRIPCIÓN</td>
+                        <td><input type="number" class="form-control text-end costo-general" value="30"></td>
+                        <td><input type="text" class="form-control observacion-input"></td>
+                    </tr>
+                    <tr>
+                        <td>DD.RR. ARANCEL (5x1000)</td>
+                        <td><input type="number" step="0.01" class="form-control text-end" id="arancel"></td>
+                        <td><input type="text" class="form-control observacion-input"
+                                value="Sujeto a base de calculo (Valor lote/Base)"></td>
+                    </tr>
+                    <tr>
+                        <td>DD.RR. DERECHO DE COMPUTO Y FOLIO REAL</td>
+                        <td><input type="number" class="form-control text-end costo-general" value="60"></td>
+                        <td><input type="text" class="form-control observacion-input"></td>
+                    </tr>
+                    <tr>
+                        <td>DD.RR. SERVICIO DE REGISTRO Y FORMULARIOS</td>
+                        <td><input type="number" class="form-control text-end costo-general" value="72"></td>
+                        <td><input type="text" class="form-control observacion-input"></td>
+                    </tr>
+                    <tr>
+                        <td>S.I.N. IMPUESTO A LA TRANSACCIÓN (IT 3%)</td>
+                        <td><input type="number" step="0.01" class="form-control text-end" id="impuesto"></td>
+                        <td><input type="text" class="form-control observacion-input"
+                                value="Sujeto a base de calculo (Valor lote/Base)"></td>
+                    </tr>
+                    <tr>
+                        <td>ANTECEDENTE CATASTRAL</td>
+                        <td><input type="number" class="form-control text-end costo-general" value="55"></td>
+                        <td><input type="text" class="form-control observacion-input"></td>
+                    </tr>
+                    <tr class="table-light">
+                        <td class="fw-bold">Total</td>
+                        <td id="totalGeneralConceptos" class="text-end fw-bold fs-5">757.01</td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -113,194 +139,20 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary btn-lg w-100 mt-5" onclick="generatePDF()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-pdf-fill me-2" viewBox="0 0 16 16"><path d="M5.523 12.424q.21-.124.459-.238a8 8 0 0 1-.45.606c-.28.337-.498.516-.635.572a.27.27 0 0 1-.035.012.28.28 0 0 1-.026-.044c-.056-.11-.054-.216.04-.36.106-.165.319-.354.647-.548m2.455-1.647q-.178.037-.356.078a21 21 0 0 0 .5-1.05 12 12 0 0 0 .51.858q-.326.048-.654.114m2.525.939a4 4 0 0 1-.435-.41q.344.007.612.054c.317.057.466.147.518.209a.1.1 0 0 1 .026.064.44.44 0 0 1-.06.2.3.3 0 0 1-.094.124.1.1 0 0 1-.069.015c-.09-.003-.252-.095-.462-.255ZM8.25 8.433c.28.326.438.44.522.5.127.093.151.11.151.11l.034.019a.6.6 0 0 1 .016.016.6.6 0 0 1 .016.016c.006.007.01.01.01.01H8.84a.5.5 0 0 1-.439.25c-.166 0-.234-.05-.234-.05s-.08-.04-.22-.16c-.173-.15-.247-.235-.247-.235a.27.27 0 0 1 0-.012c.002-.002.007-.007.016-.016.01-.01.028-.027.05-.053.07-.077.16-.17.275-.29.139-.144.29-.3.455-.468a.9.9 0 0 1 .129-.103.2.2 0 0 1 .016-.012.2.2 0 0 1 .016-.012l.007-.004a.05.05 0 0 1 .003-.001c.003-.002.007-.004.011-.006l.01-.004c.003-.002.005-.003.005-.003l.002-.001h.002Z"/><path d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4A1 1 0 0 1 14 4.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2m5.5 1.5v2a1 1 0 0 0 1 1h2zM4.165 13.668c.09.18.23.343.438.419.207.075.412.04.58-.092.17-.132.28-.396.28-.646 0-.21-.058-.4-.172-.518-.114-.117-.27-.164-.46-.164-.193 0-.358.061-.474.184-.118.123-.175.29-.175.477 0 .15.046.282.12.39zm1.955-1.583c.096.148.223.263.374.339.15.077.309.115.477.115.19 0 .352-.057.488-.172.135-.115.203-.28.203-.494 0-.19-.06-.347-.18-.462-.12-.115-.283-.172-.488-.172-.16 0-.304.04-.434.123a1 1 0 0 0-.351.367zm1.965 1.583c.096.148.223.263.374.339.15.077.309.115.477.115.19 0 .352-.057.488-.172.135-.115.203-.28.203-.494 0-.19-.06-.347-.18-.462-.12-.115-.283-.172-.488-.172-.16 0-.304.04-.434.123a1 1 0 0 0-.351.367zm.642-2.954c.025.025.05.05.074.074l.02.018a.15.15 0 0 1 .01.016c.003.003.003.003.003.003a.1.1 0 0 1 0 .01.1.1 0 0 1-.004.004.1.1 0 0 1-.003.003.1.1 0 0 1-.016.01c-.003.002-.003.002-.003.002l-.018.02a.7.7 0 0 1-.074.074.5.5 0 0 1-.077.053.5.5 0 0 1-.09.042.5.5 0 0 1-.09.03.5.5 0 0 1-.09.017.5.5 0 0 1-.09-.017.5.5 0 0 1-.09-.03.5.5 0 0 1-.09-.042.5.5 0 0 1-.077-.053.7.7 0 0 1-.074-.074l-.018-.02a.15.15 0 0 1-.003-.002c-.002-.003-.002-.003-.002-.003a.1.1 0 0 1-.01-.016.1.1 0 0 1-.004-.004.1.1 0 0 1 0-.01c.002-.002.002-.002.002-.003a.15.15 0 0 1 .018-.02.7.7 0 0 1 .074-.074.5.5 0 0 1 .077-.053.5.5 0 0 1 .09-.042.5.5 0 0 1 .09-.03c.03-.01.06-.017.09-.017s.06.007.09.017c.03.01.06.022.09.042.03.018.058.035.077.053z"/></svg>
+            <button class="btn btn-primary btn-lg w-100 mt-5" id="generate-pdf-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-file-earmark-pdf-fill me-2" viewBox="0 0 16 16">
+                    <path
+                        d="M5.523 12.424q.21-.124.459-.238a8 8 0 0 1-.45.606c-.28.337-.498.516-.635.572a.27.27 0 0 1-.035.012.28.28 0 0 1-.026-.044c-.056-.11-.054-.216.04-.36.106-.165.319-.354.647-.548m2.455-1.647q-.178.037-.356.078a21 21 0 0 0 .5-1.05 12 12 0 0 0 .51.858q-.326.048-.654.114m2.525.939a4 4 0 0 1-.435-.41q.344.007.612.054c.317.057.466.147.518.209a.1.1 0 0 1 .026.064.44.44 0 0 1-.06.2.3.3 0 0 1-.094.124.1.1 0 0 1-.069.015c-.09-.003-.252-.095-.462-.255ZM8.25 8.433c.28.326.438.44.522.5.127.093.151.11.151.11l.034.019a.6.6 0 0 1 .016.016.6.6 0 0 1 .016.016c.006.007.01.01.01.01H8.84a.5.5 0 0 1-.439.25c-.166 0-.234-.05-.234-.05s-.08-.04-.22-.16c-.173-.15-.247-.235-.247-.235a.27.27 0 0 1 0-.012c.002-.002.007-.007.016-.016.01-.01.028-.027.05-.053.07-.077.16-.17.275-.29.139-.144.29-.3.455-.468a.9.9 0 0 1 .129-.103.2.2 0 0 1 .016-.012.2.2 0 0 1 .016-.012l.007-.004a.05.05 0 0 1 .003-.001c.003-.002.007-.004.011-.006l.01-.004c.003-.002.005-.003.005-.003l.002-.001h.002Z" />
+                    <path
+                        d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4A1 1 0 0 1 14 4.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2m5.5 1.5v2a1 1 0 0 0 1 1h2zM4.165 13.668c.09.18.23.343.438.419.207.075.412.04.58-.092.17-.132.28-.396.28-.646 0-.21-.058-.4-.172-.518-.114-.117-.27-.164-.46-.164-.193 0-.358.061-.474.184-.118.123-.175.29-.175.477 0 .15.046.282.12.39zm1.955-1.583c.096.148.223.263.374.339.15.077.309.115.477.115.19 0 .352-.057.488-.172.135-.115.203-.28.203-.494 0-.19-.06-.347-.18-.462-.12-.115-.283-.172-.488-.172-.16 0-.304.04-.434.123a1 1 0 0 0-.351.367zm1.965 1.583c.096.148.223.263.374.339.15.077.309.115.477.115.19 0 .352-.057.488-.172.135-.115.203-.28.203-.494 0-.19-.06-.347-.18-.462-.12-.115-.283-.172-.488-.172-.16 0-.304.04-.434.123a1 1 0 0 0-.351.367zm.642-2.954c.025.025.05.05.074.074l.02.018a.15.15 0 0 1 .01.016c.003.003.003.003.003.003a.1.1 0 0 1 0 .01.1.1 0 0 1-.004.004.1.1 0 0 1-.003.003.1.1 0 0 1-.016.01c-.003.002-.003.002-.003.002l-.018.02a.7.7 0 0 1-.074.074.5.5 0 0 1-.077.053.5.5 0 0 1-.09.042.5.5 0 0 1-.09.03.5.5 0 0 1-.09.017.5.5 0 0 1-.09-.017.5.5 0 0 1-.09-.03.5.5 0 0 1-.09-.042.5.5 0 0 1-.077-.053.7.7 0 0 1-.074-.074l-.018-.02a.15.15 0 0 1-.003-.002c-.002-.003-.002-.003-.002-.003a.1.1 0 0 1-.01-.016.1.1 0 0 1-.004-.004.1.1 0 0 1 0-.01c.002-.002.002-.002.002-.003a.15.15 0 0 1 .018-.02.7.7 0 0 1 .074-.074.5.5 0 0 1 .077-.053.5.5 0 0 1 .09-.042.5.5 0 0 1 .09-.03c.03-.01.06-.017.09-.017s.06.007.09.017c.03.01.06.022.09.042.03.018.058.035.077.053z" />
+                </svg>
                 Generar PDF Profesional
             </button>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-
-    <script>
-        function updateTotals() {
-            let totalTransferencia = 0;
-            document.querySelectorAll('.costo-transferencia').forEach(input => {
-                totalTransferencia += parseFloat(input.value) || 0;
-            });
-            document.getElementById('totalTransferencia').textContent = totalTransferencia.toFixed(2);
-
-            let totalConceptos = 0;
-            document.querySelectorAll('.costo-general').forEach(input => {
-                totalConceptos += parseFloat(input.value) || 0;
-            });
-            
-            const arancel = parseFloat(document.getElementById('arancel').value) || 0;
-            const impuesto = parseFloat(document.getElementById('impuesto').value) || 0;
-            totalConceptos += arancel + impuesto;
-            
-            document.getElementById('totalGeneralConceptos').textContent = totalConceptos.toFixed(2);
-            
-            const totalGeneral = totalTransferencia + totalConceptos;
-            document.getElementById('totalGeneral').textContent = totalGeneral.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-
-        function calculateAndApply() {
-            const valorLote = parseFloat(document.getElementById('valorLote').value) || 0;
-            const arancel = (valorLote * 5) / 1000;
-            const impuesto = valorLote * 0.03;
-            
-            document.getElementById('arancel').value = arancel.toFixed(2);
-            document.getElementById('impuesto').value = impuesto.toFixed(2);
-            
-            updateTotals();
-        }
-
-        window.onload = calculateAndApply;
-
-        function generatePDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            // --- HEADER ---
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(14);
-            doc.text('TRÁMITE DE TITULARIZACIÓN', 105, 20, { align: 'center' });
-            
-            doc.setFillColor(233, 236, 239); // Soft Grey
-            doc.rect(65, 25, 80, 8, 'F');
-            doc.setFontSize(10);
-            doc.setTextColor(0, 0, 0);
-            doc.setFont('helvetica', 'bold');
-            doc.text('INMOBILIARIA KANTUTANI S.A.', 105, 30.5, { align: 'center' });
-
-            // --- CLIENT DATA ---
-            let startY = 45;
-            const leftMargin = 14;
-            const rightMargin = 110;
-            doc.setFont('helvetica', 'normal');
-
-            const clientData = [
-                { label: 'Nombre Cliente', value: document.getElementById('nombreCliente').value },
-                { label: 'Contrato', value: document.getElementById('contrato').value },
-                { label: 'Valor Lote (Bs)', value: document.getElementById('valorLote').value },
-                { label: 'Base imponible actualizado (Bs)', value: document.getElementById('baseImponible').value },
-                { label: 'Tipo de cambio', value: document.getElementById('tipoCambio').value },
-                { label: 'Lote', value: document.getElementById('lote').value },
-                { label: 'Proyecto / Sector', value: document.getElementById('proyecto').value, fullWidth: true },
-            ];
-
-            let currentY = startY;
-            for (let i = 0; i < clientData.length; i += 2) {
-                const item1 = clientData[i];
-                const item2 = (i + 1 < clientData.length && !item1.fullWidth) ? clientData[i+1] : null;
-
-                doc.setFontSize(8);
-                doc.setTextColor(100);
-                doc.text(item1.label, leftMargin, currentY);
-                if (item2) doc.text(item2.label, rightMargin, currentY);
-
-                currentY += 4;
-                doc.setFontSize(10);
-                doc.setTextColor(0);
-                doc.setFont('helvetica', 'bold');
-                doc.text(item1.value, leftMargin, currentY);
-                if (item2) doc.text(item2.value, rightMargin, currentY);
-                
-                currentY += 7;
-                if(item1.fullWidth) i--;
-            }
-            startY = currentY - 4;
-            doc.setDrawColor(222, 226, 230);
-            doc.line(leftMargin, startY, 196, startY);
-
-            // --- TABLES ---
-            const headStyles = { fillColor: [233, 236, 239], textColor: 30, fontStyle: 'bold', halign: 'center' };
-            const footStyles = { fillColor: [233, 236, 239], textColor: 30, fontStyle: 'bold' };
-            const columnStyles = { 1: { halign: 'right' } };
-
-            // Table 1
-            const table1Body = [];
-            const table1Rows = document.querySelectorAll('#tabla-transferencia tbody tr');
-            table1Rows.forEach((row, index) => {
-                if (index < table1Rows.length - 1) {
-                    table1Body.push([
-                        row.cells[0].innerText,
-                        parseFloat(row.querySelector('input[type="number"]').value).toFixed(2),
-                        row.querySelector('input[type="text"]').value
-                    ]);
-                }
-            });
-            const total1 = document.getElementById('totalTransferencia').textContent;
-
-            doc.setFontSize(11);
-            doc.setTextColor(0);
-            doc.setFont('helvetica', 'bold');
-            doc.text('Costo por trámite de transferencia', leftMargin, startY + 8);
-            doc.autoTable({
-                startY: startY + 10,
-                head: [['CONCEPTO', 'IMPORTE (BS)', 'OBSERVACIONES']],
-                body: table1Body,
-                foot: [[{ content: 'Total', colSpan: 2, styles: { halign: 'right' } }, total1]],
-                theme: 'grid',
-                headStyles: headStyles,
-                footStyles: footStyles,
-                columnStyles: columnStyles,
-                styles: { fontSize: 9 },
-            });
-
-            // Table 2
-            let finalY = doc.lastAutoTable.finalY;
-            const table2Body = [];
-            const table2Rows = document.querySelectorAll('#tabla-regularizacion tbody tr');
-            table2Rows.forEach((row, index) => {
-                if (index < table2Rows.length - 1) {
-                    const amountInput = row.querySelector('input[type="number"]');
-                    table2Body.push([
-                        row.cells[0].innerText,
-                        parseFloat(amountInput ? amountInput.value : row.cells[1].textContent).toFixed(2),
-                        row.cells[2].textContent
-                    ]);
-                }
-            });
-            const total2 = document.getElementById('totalGeneralConceptos').textContent;
-
-            doc.setFontSize(11);
-            doc.setTextColor(0);
-            doc.setFont('helvetica', 'bold');
-            doc.autoTable({
-                startY: finalY + 10,
-                head: [['CONCEPTO', 'IMPORTE (BS)', 'OBSERVACIONES']],
-                body: table2Body,
-                foot: [[{ content: 'Total', colSpan: 2, styles: { halign: 'right' } }, total2]],
-                theme: 'grid',
-                headStyles: headStyles,
-                footStyles: footStyles,
-                columnStyles: columnStyles,
-                styles: { fontSize: 9 },
-            });
-
-            // --- GRAND TOTAL ---
-            finalY = doc.lastAutoTable.finalY;
-            const grandTotal = document.getElementById('totalGeneral').textContent;
-            doc.setFillColor(241, 243, 245);
-            doc.roundedRect(120, finalY + 10, 76, 15, 3, 3, 'F');
-            doc.setFontSize(10);
-            doc.setTextColor(50);
-            doc.setFont('helvetica', 'bold');
-            doc.text('Total General (Bs)', 125, finalY + 16);
-            doc.setFontSize(14);
-            doc.setTextColor(0);
-            doc.text(grandTotal, 194, finalY + 22, { align: 'right' });
-
-            // --- SAVE ---
-            const nombreCliente = document.getElementById('nombreCliente').value.trim();
-            const contrato = document.getElementById('contrato').value.trim();
-            const fileName = `Minuta_${nombreCliente.replace(/ /g, '_')}_${contrato}.pdf`;
-            doc.save(fileName);
-        }
-
-    </script>
+    <script type="module" src="/src/main.js"></script>
 </body>
+
 </html>
