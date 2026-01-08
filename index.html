@@ -38,97 +38,224 @@
                         class="form-control" id="proyecto" value="KANTUTANI CEMENTERIO JARDIN / MIRADOR"></div>
             </div>
 
-            <h4>Costo por trámite de transferencia</h4>
-            <table class="table table-hover align-middle" id="tabla-transferencia">
-                <thead class="table-light">
-                    <tr>
-                        <th>CONCEPTO</th>
-                        <th style="width: 200px;">IMPORTE (BS)</th>
-                        <th>OBSERVACIONES</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>FOTOCOPIAS LEGALIZADAS</td>
-                        <td><input type="number" class="form-control text-end costo-transferencia" value="50"></td>
-                        <td><input type="text" class="form-control observacion-input"></td>
-                    </tr>
-                    <tr>
-                        <td>FOTOCOPIAS SIMPLES</td>
-                        <td><input type="number" class="form-control text-end costo-transferencia" value="50"></td>
-                        <td><input type="text" class="form-control observacion-input"></td>
-                    </tr>
-                    <tr>
-                        <td>NOTARIA (PROTOCOLO Y TESTIMONIO)</td>
-                        <td><input type="number" class="form-control text-end costo-transferencia" value="200"></td>
-                        <td><input type="text" class="form-control observacion-input"></td>
-                    </tr>
-                    <tr>
-                        <td>GASTOS ADMINISTRATIVOS</td>
-                        <td><input type="number" class="form-control text-end costo-transferencia" value="200"></td>
-                        <td><input type="text" class="form-control observacion-input"></td>
-                    </tr>
-                    <tr>
-                        <td>GESTIÓN LEGAL</td>
-                        <td><input type="number" class="form-control text-end costo-transferencia" value="400"></td>
-                        <td><input type="text" class="form-control observacion-input"></td>
-                    </tr>
-                    <tr class="table-light">
-                        <td class="fw-bold">Total</td>
-                        <td id="totalTransferencia" class="text-end fw-bold fs-5">900.00</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- SECCIÓN KANTUTANI -->
+            <div id="kantutani-section" class="company-section">
+                <h4>Costo por trámite de transferencia en Kantutani</h4>
+                <table class="table table-hover align-middle" id="tabla-transferencia">
+                    <thead class="table-light">
+                        <tr>
+                            <th>CONCEPTO</th>
+                            <th style="width: 200px;">IMPORTE (BS)</th>
+                            <th>OBSERVACIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FOTOCOPIAS LEGALIZADAS</td>
+                            <td><input type="number" class="form-control text-end costo-transferencia" value="50"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>FOTOCOPIAS SIMPLES</td>
+                            <td><input type="number" class="form-control text-end costo-transferencia" value="50"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>NOTARIA (PROTOCOLO Y TESTIMONIO)</td>
+                            <td><input type="number" class="form-control text-end costo-transferencia" value="200"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>GASTOS ADMINISTRATIVOS</td>
+                            <td><input type="number" class="form-control text-end costo-transferencia" value="200"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>GESTIÓN LEGAL</td>
+                            <td><input type="number" class="form-control text-end costo-transferencia" value="400"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr class="table-light">
+                            <td class="fw-bold">Total</td>
+                            <td class="totalTransferencia text-end fw-bold fs-5">900.00</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <table class="table table-hover align-middle" id="tabla-regularizacion">
-                <thead class="table-light">
-                    <tr>
-                        <th>CONCEPTO</th>
-                        <th style="width: 200px;">IMPORTE (BS)</th>
-                        <th>OBSERVACIONES</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>DD.RR. INSCRIPCIÓN DE SUBINSCRIPCIÓN</td>
-                        <td><input type="number" class="form-control text-end costo-general" value="30"></td>
-                        <td><input type="text" class="form-control observacion-input"></td>
-                    </tr>
-                    <tr>
-                        <td>DD.RR. ARANCEL (5x1000)</td>
-                        <td><input type="number" step="0.01" class="form-control text-end" id="arancel"></td>
-                        <td><input type="text" class="form-control observacion-input"
-                                value="Sujeto a base de calculo (Valor lote/Base)"></td>
-                    </tr>
-                    <tr>
-                        <td>DD.RR. DERECHO DE COMPUTO Y FOLIO REAL</td>
-                        <td><input type="number" class="form-control text-end costo-general" value="60"></td>
-                        <td><input type="text" class="form-control observacion-input"></td>
-                    </tr>
-                    <tr>
-                        <td>DD.RR. SERVICIO DE REGISTRO Y FORMULARIOS</td>
-                        <td><input type="number" class="form-control text-end costo-general" value="72"></td>
-                        <td><input type="text" class="form-control observacion-input"></td>
-                    </tr>
-                    <tr>
-                        <td>S.I.N. IMPUESTO A LA TRANSACCIÓN (IT 3%)</td>
-                        <td><input type="number" step="0.01" class="form-control text-end" id="impuesto"></td>
-                        <td><input type="text" class="form-control observacion-input"
-                                value="Sujeto a base de calculo (Valor lote/Base)"></td>
-                    </tr>
-                    <tr>
-                        <td>ANTECEDENTE CATASTRAL</td>
-                        <td><input type="number" class="form-control text-end costo-general" value="55"></td>
-                        <td><input type="text" class="form-control observacion-input"></td>
-                    </tr>
-                    <tr class="table-light">
-                        <td class="fw-bold">Total</td>
-                        <td id="totalGeneralConceptos" class="text-end fw-bold fs-5">757.01</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+                <table class="table table-hover align-middle" id="tabla-regularizacion">
+                    <thead class="table-light">
+                        <tr>
+                            <th>CONCEPTO</th>
+                            <th style="width: 200px;">IMPORTE (BS)</th>
+                            <th>OBSERVACIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>DD.RR. INSCRIPCIÓN DE SUBINSCRIPCIÓN</td>
+                            <td><input type="number" class="form-control text-end costo-general" value="30"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>DD.RR. ARANCEL (5x1000)</td>
+                            <td><input type="number" step="0.01" class="form-control text-end" data-tax-type="arancel">
+                            </td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options"
+                                    value="Sujeto a base de calculo (Valor lote/Base)"></td>
+                        </tr>
+                        <tr>
+                            <td>DD.RR. DERECHO DE COMPUTO Y FOLIO REAL</td>
+                            <td><input type="number" class="form-control text-end costo-general" value="60"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>DD.RR. SERVICIO DE REGISTRO Y FORMULARIOS</td>
+                            <td><input type="number" class="form-control text-end costo-general" value="72"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>S.I.N. IMPUESTO A LA TRANSACCIÓN (IT 3%)</td>
+                            <td><input type="number" step="0.01" class="form-control text-end" data-tax-type="impuesto">
+                            </td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options"
+                                    value="Sujeto a base de calculo (Valor lote/Base)"></td>
+                        </tr>
+                        <tr>
+                            <td>ANTECEDENTE CATASTRAL</td>
+                            <td><input type="number" class="form-control text-end costo-general" value="55"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr class="table-light">
+                            <td class="fw-bold">Total</td>
+                            <td class="totalGeneralConceptos text-end fw-bold fs-5">757.01</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- SECCIÓN LAS MISIONES -->
+            <div id="misiones-section" class="company-section d-none">
+                <h4>Costo por trámite de transferencia en Las Misiones</h4>
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>CONCEPTO</th>
+                            <th style="width: 200px;">IMPORTE (BS)</th>
+                            <th>OBSERVACIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>NOTARIA (PROTOCOLO Y TESTIMONIO)</td>
+                            <td><input type="number" class="form-control text-end costo-transferencia" value="400"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>DISEÑO DE PLANO/ DIGITALIZACIÓN DE DOCUMENTACIÓN</td>
+                            <td><input type="number" class="form-control text-end costo-transferencia" value="100"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>FOTOCOPIAS SIMPLES</td>
+                            <td><input type="number" class="form-control text-end costo-transferencia" value="50"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>GASTOS ADMINISTRATIVOS</td>
+                            <td><input type="number" class="form-control text-end costo-transferencia" value="100"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>GESTIÓN LEGAL</td>
+                            <td><input type="number" class="form-control text-end costo-transferencia" value="850"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr class="table-light">
+                            <td class="fw-bold">Total</td>
+                            <td class="totalTransferencia text-end fw-bold fs-5">1500.00</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>CONCEPTO</th>
+                            <th style="width: 200px;">IMPORTE (BS)</th>
+                            <th>OBSERVACIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>S.I.N. IMPUESTO A LA TRANSFERENCIA (IT 3%)</td>
+                            <td><input type="number" step="0.01" class="form-control text-end" data-tax-type="impuesto">
+                            </td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options"
+                                    value="Sujeto al valor del lote"></td>
+                        </tr>
+                        <tr>
+                            <td>DD.RR. ARANCEL (5x1000)</td>
+                            <td><input type="number" step="0.01" class="form-control text-end" data-tax-type="arancel">
+                            </td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options"
+                                    value="Sujeto al valor del lote"></td>
+                        </tr>
+                        <tr>
+                            <td>VISADO DE PLANO DE USO DE SUELO/ PLAN REGULADOR</td>
+                            <td><input type="number" class="form-control text-end costo-general" value="82.50"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>CERTIFICADO CATASTRAL DE TRANSFERENCIA/ SER - GAMSC</td>
+                            <td><input type="number" class="form-control text-end costo-general" value="45"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>CERTIFICADO CATASTRAL DE CAMBIO DE NOMBRE/ SER - GAMSC</td>
+                            <td><input type="number" class="form-control text-end costo-general" value="45"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>DD.RR. SERVICIO INFORMÁTICO DE REGISTRO Y FORMULARIOS</td>
+                            <td><input type="number" class="form-control text-end costo-general" value="104"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>TASA DE EXCEPCIÓN DE IMPUESTO MUNICIPAL A LA TRANSFERENCIA ONEROSA DE BIENES INMUEBLES
+                                (IMT)/SER GAMSC</td>
+                            <td><input type="number" class="form-control text-end costo-general" value="150"></td>
+                            <td><input type="text" class="form-control observacion-input" list="observation-options">
+                            </td>
+                        </tr>
+                        <tr class="table-light">
+                            <td class="fw-bold">Total</td>
+                            <td class="totalGeneralConceptos text-end fw-bold fs-5">877.50</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <div class="row justify-content-end mt-4">
                 <div class="col-md-6">
@@ -151,6 +278,10 @@
             </button>
         </div>
     </div>
+
+    <datalist id="observation-options">
+        <option value="No se considera el Item ya que el cliente lo realizo por su cuenta"></option>
+    </datalist>
 
     <script type="module" src="/src/main.js"></script>
 </body>
